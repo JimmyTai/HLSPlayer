@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF624FB328F90BCA0084CEF9 /* BufferedReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF624FB228F90BCA0084CEF9 /* BufferedReader.swift */; };
+		BF624FB428F90BCA0084CEF9 /* BufferedReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF624FB228F90BCA0084CEF9 /* BufferedReader.swift */; };
+		BF624FB628F90BFA0084CEF9 /* StringBufferedReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF624FB528F90BFA0084CEF9 /* StringBufferedReader.swift */; };
+		BF624FB728F90BFA0084CEF9 /* StringBufferedReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF624FB528F90BFA0084CEF9 /* StringBufferedReader.swift */; };
+		BF624FB928F924870084CEF9 /* ManifestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF624FB828F924870084CEF9 /* ManifestBuilder.swift */; };
+		BF624FBA28F924870084CEF9 /* ManifestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF624FB828F924870084CEF9 /* ManifestBuilder.swift */; };
+		BF624FBC28F927080084CEF9 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF624FBB28F927080084CEF9 /* StringExtensions.swift */; };
+		BF624FBD28F927080084CEF9 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF624FBB28F927080084CEF9 /* StringExtensions.swift */; };
 		D908A70B28F03149003047A6 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D908A70A28F03149003047A6 /* Tests_iOS.swift */; };
 		D908A70D28F03149003047A6 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D908A70C28F03149003047A6 /* Tests_iOSLaunchTests.swift */; };
 		D908A71728F03149003047A6 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D908A71628F03149003047A6 /* Tests_macOS.swift */; };
@@ -17,6 +25,12 @@
 		D908A71D28F03149003047A6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D908A6F328F03147003047A6 /* ContentView.swift */; };
 		D908A71E28F03149003047A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D908A6F428F03149003047A6 /* Assets.xcassets */; };
 		D908A71F28F03149003047A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D908A6F428F03149003047A6 /* Assets.xcassets */; };
+		D908A73028F806CC003047A6 /* MasterPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D908A72F28F806CC003047A6 /* MasterPlaylist.swift */; };
+		D908A73128F806CC003047A6 /* MasterPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D908A72F28F806CC003047A6 /* MasterPlaylist.swift */; };
+		D908A73328F80707003047A6 /* MediaPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D908A73228F80707003047A6 /* MediaPlaylist.swift */; };
+		D908A73428F80707003047A6 /* MediaPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D908A73228F80707003047A6 /* MediaPlaylist.swift */; };
+		D908A73628F80789003047A6 /* MediaSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D908A73528F80789003047A6 /* MediaSegment.swift */; };
+		D908A73728F80789003047A6 /* MediaSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D908A73528F80789003047A6 /* MediaSegment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +51,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BF624FB228F90BCA0084CEF9 /* BufferedReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferedReader.swift; sourceTree = "<group>"; };
+		BF624FB528F90BFA0084CEF9 /* StringBufferedReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringBufferedReader.swift; sourceTree = "<group>"; };
+		BF624FB828F924870084CEF9 /* ManifestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManifestBuilder.swift; sourceTree = "<group>"; };
+		BF624FBB28F927080084CEF9 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		D908A6F228F03147003047A6 /* HLSPlayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HLSPlayerApp.swift; sourceTree = "<group>"; };
 		D908A6F328F03147003047A6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D908A6F428F03149003047A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +67,9 @@
 		D908A71228F03149003047A6 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D908A71628F03149003047A6 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		D908A71828F03149003047A6 /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
+		D908A72F28F806CC003047A6 /* MasterPlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterPlaylist.swift; sourceTree = "<group>"; };
+		D908A73228F80707003047A6 /* MediaPlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlaylist.swift; sourceTree = "<group>"; };
+		D908A73528F80789003047A6 /* MediaSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSegment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +118,7 @@
 		D908A6F128F03147003047A6 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				D908A72E28F8069E003047A6 /* Parser */,
 				D908A6F228F03147003047A6 /* HLSPlayerApp.swift */,
 				D908A6F328F03147003047A6 /* ContentView.swift */,
 				D908A6F428F03149003047A6 /* Assets.xcassets */,
@@ -139,6 +161,20 @@
 				D908A71828F03149003047A6 /* Tests_macOSLaunchTests.swift */,
 			);
 			path = "Tests macOS";
+			sourceTree = "<group>";
+		};
+		D908A72E28F8069E003047A6 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				D908A72F28F806CC003047A6 /* MasterPlaylist.swift */,
+				D908A73228F80707003047A6 /* MediaPlaylist.swift */,
+				D908A73528F80789003047A6 /* MediaSegment.swift */,
+				BF624FB228F90BCA0084CEF9 /* BufferedReader.swift */,
+				BF624FB528F90BFA0084CEF9 /* StringBufferedReader.swift */,
+				BF624FB828F924870084CEF9 /* ManifestBuilder.swift */,
+				BF624FBB28F927080084CEF9 /* StringExtensions.swift */,
+			);
+			path = Parser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,7 +335,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D908A73328F80707003047A6 /* MediaPlaylist.swift in Sources */,
+				D908A73028F806CC003047A6 /* MasterPlaylist.swift in Sources */,
 				D908A71C28F03149003047A6 /* ContentView.swift in Sources */,
+				BF624FBC28F927080084CEF9 /* StringExtensions.swift in Sources */,
+				BF624FB328F90BCA0084CEF9 /* BufferedReader.swift in Sources */,
+				D908A73628F80789003047A6 /* MediaSegment.swift in Sources */,
+				BF624FB628F90BFA0084CEF9 /* StringBufferedReader.swift in Sources */,
+				BF624FB928F924870084CEF9 /* ManifestBuilder.swift in Sources */,
 				D908A71A28F03149003047A6 /* HLSPlayerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,7 +351,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D908A73428F80707003047A6 /* MediaPlaylist.swift in Sources */,
+				D908A73128F806CC003047A6 /* MasterPlaylist.swift in Sources */,
 				D908A71D28F03149003047A6 /* ContentView.swift in Sources */,
+				BF624FBD28F927080084CEF9 /* StringExtensions.swift in Sources */,
+				BF624FB428F90BCA0084CEF9 /* BufferedReader.swift in Sources */,
+				D908A73728F80789003047A6 /* MediaSegment.swift in Sources */,
+				BF624FB728F90BFA0084CEF9 /* StringBufferedReader.swift in Sources */,
+				BF624FBA28F924870084CEF9 /* ManifestBuilder.swift in Sources */,
 				D908A71B28F03149003047A6 /* HLSPlayerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -477,7 +527,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.jimmytai.HLSPlayer;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.jimmytai.hls-player";
 				PRODUCT_NAME = HLSPlayer;
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -507,7 +557,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.jimmytai.HLSPlayer;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.jimmytai.hls-player";
 				PRODUCT_NAME = HLSPlayer;
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
