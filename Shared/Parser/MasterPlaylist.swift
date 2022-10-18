@@ -7,7 +7,7 @@
 
 import Foundation
 
-open class MasterPlaylist {
+open class MasterPlaylist: CustomStringConvertible {
     var playlists = [MediaPlaylist]()
     open var path: String?
     
@@ -26,5 +26,12 @@ open class MasterPlaylist {
     
     open func getPlaylistCount() -> Int {
         return playlists.count
+    }
+    
+    public var description: String {
+        return """
+        path: \(String(describing: path)),
+        playlists: \(String(describing: playlists))
+        """
     }
 }

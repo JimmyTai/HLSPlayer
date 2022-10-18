@@ -8,31 +8,73 @@
 import SwiftUI
 import AVKit
 
-class PlayerManager {
+class PlayerManager: NSObject, M3u8ResourceLoaderDelegate {
+    
     let asset: AVURLAsset
     let playerItem: AVPlayerItem
     let player: AVPlayer
     
-    init() {
-        asset = AVURLAsset(url: URL(string: "m3u8Scheme://watch.swag.live/624475f7da7235992f38f551/public-blurout-3-27.m3u8")!)
+    override init() {
+        asset = AVURLAsset(url: URL(string: "m3u8Scheme://watch.swag.live/60ca1f7d6c648bdd7c95542f/public-blurout-3-27.m3u8")!)
         asset.resourceLoader.setDelegate(M3u8ResourceLoader.shared, queue: .main)
         playerItem = AVPlayerItem(asset: asset)
         if #available(iOS 9.0, *) {
             playerItem.canUseNetworkResourcesForLiveStreamingWhilePaused = true
         }
         player = AVPlayer(playerItem: playerItem)
+        super.init()
+        M3u8ResourceLoader.shared.delegate = self
         print("[PlayerManager] prepare done")
+    }
+    
+    var count: Int = 0
+    
+    func onMediaPlaylistLoad(playlist: MediaPlaylist) {
+        guard let lastEvent = playerItem.accessLog()?.events.last else {
+            return
+        }
+        
+        
+        for range in player.currentItem?.seekableTimeRanges ?? [] {
+            let r: CMTimeRange = range as! CMTimeRange
+            print("[PlayerManager] seekable range => start: \(r.start), duration: \(r.duration)")
+        }
+        print("[PlayerManager] first segment sequence: \(playlist.segments.first?.sequence)")
+        guard let firstSequenceId: Int = playlist.segments.first?.sequence else { return }
+        var timeOffset: Int
+        if firstSequenceId % 10 <= 1 {
+            timeOffset = firstSequenceId % 10 * 3
+        } else {
+            timeOffset = (10 - (firstSequenceId % 10)) * 3
+        }
+        let seekableRanges = player.currentItem!.seekableTimeRanges
+        guard seekableRanges.count > 0 else {
+            return
+        }
+        
+        let range = seekableRanges.last as! CMTimeRange
+        let livePosition = range.start + range.duration
+        
+        let minus = CMTime(seconds: Double(12 - timeOffset), preferredTimescale: Int32(NSEC_PER_SEC))
+        let time = livePosition - minus
+        
+        
+        if count == 1 {
+            print("[PlayerManager] seek")
+            player.seek(to: time)
+        }
+        count += 1
     }
 }
 
 class M3u8ResourceLoader : NSObject, AVAssetResourceLoaderDelegate {
     /// 假的链接(乱写的，前缀反正不要http或者https，后缀一定要.m3u8，中间随便)
-    fileprivate let m3u8_url_vir: String = "m3u8Scheme://watch.swag.live/624475f7da7235992f38f551/public-blurout-3-27.m3u8"
+    fileprivate let m3u8_url_vir: String = "m3u8Scheme://watch.swag.live/60ca1f7d6c648bdd7c95542f/public-blurout-3-27.m3u8"
     
-    fileprivate var m3u8_host: String = "https://watch.swag.live/624475f7da7235992f38f551"
+    fileprivate var m3u8_host: String = "https://watch.swag.live/60ca1f7d6c648bdd7c95542f"
     
     /// 真的链接
-    fileprivate var m3u8_url: String = "https://watch.swag.live/624475f7da7235992f38f551/public-blurout-3-27.m3u8"
+    fileprivate var m3u8_url: String = "https://watch.swag.live/60ca1f7d6c648bdd7c95542f/public-blurout-3-27.m3u8"
     
     /// 单例
     fileprivate static let instance = M3u8ResourceLoader()
@@ -44,18 +86,27 @@ class M3u8ResourceLoader : NSObject, AVAssetResourceLoaderDelegate {
         }
     }
     
+    public var delegate: M3u8ResourceLoaderDelegate?
+    
     func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
         /// 获取到拦截的链接url
         guard let url = loadingRequest.request.url?.absoluteString else {
             return false
         }
         
-        print("[PlayerManager] resource loader url: \(url)")
+        //        print("[PlayerManager] resource loader url: \(url)")
         
         let targetUrl: String = url.replacingOccurrences(of: "m3u8Scheme", with: "https")
         
         if url.hasSuffix(".m3u8") {
             if let data = self.M3u8Request(targetUrl) {
+                let dataStr: String = String(decoding: data, as: UTF8.self)
+                if url.hasSuffix("/preview-blurout-3-27.m3u8") {
+                    let mediaPlaylist: MediaPlaylist = ManifestBuilder().parseMediaPlaylist(StringBufferedReader(data: dataStr), onMediaSegment: nil)
+                    DispatchQueue.main.async {
+                        self.delegate?.onMediaPlaylistLoad(playlist: mediaPlaylist)
+                    }
+                }
                 DispatchQueue.main.async {
                     /// 将数据塞给系统
                     loadingRequest.dataRequest?.respond(with: data)
@@ -94,14 +145,14 @@ class M3u8ResourceLoader : NSObject, AVAssetResourceLoaderDelegate {
     }
     
     func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForRenewalOfRequestedResource renewalRequest: AVAssetResourceRenewalRequest) -> Bool {
-
+        
         /// 获取到拦截的链接url
         guard let url = renewalRequest.request.url?.absoluteString else {
             return false
         }
-
-        print("[PlayerManager] renewal request url: \(url)")
-
+        
+        //        print("[PlayerManager] renewal request url: \(url)")
+        
         return false
     }
     
@@ -114,7 +165,6 @@ class M3u8ResourceLoader : NSObject, AVAssetResourceLoaderDelegate {
             sem.signal()
         }.resume()
         sem.wait()
-        print("[PlayerManager] url: \(url), response data: \(responseData)")
         
         return responseData
     }
@@ -123,6 +173,10 @@ class M3u8ResourceLoader : NSObject, AVAssetResourceLoaderDelegate {
     func finishLoadingError(_ loadingRequest: AVAssetResourceLoadingRequest) {
         loadingRequest.finishLoading(with: NSError(domain: NSURLErrorDomain, code: 400, userInfo: nil) as Error)
     }
+}
+
+protocol M3u8ResourceLoaderDelegate: NSObjectProtocol {
+    func onMediaPlaylistLoad(playlist: MediaPlaylist) -> Void
 }
 
 struct ContentView: View {

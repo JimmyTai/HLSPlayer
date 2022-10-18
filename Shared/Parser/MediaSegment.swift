@@ -7,7 +7,7 @@
 
 import Foundation
 
-open class MediaSegment {
+open class MediaSegment: CustomStringConvertible {
     var mediaPlaylist: MediaPlaylist?
     open var duration: Float?
     open var sequence: Int = 0
@@ -21,5 +21,18 @@ open class MediaSegment {
     
     open func getMediaPlayList() -> MediaPlaylist? {
         return self.mediaPlaylist
+    }
+    
+    public var description: String {
+        return """
+        MediaSegment:
+            duration: \(String(describing: duration)),
+            sequence: \(String(describing: sequence)),
+            subrangeLength: \(String(describing: subrangeLength)),
+            subrangeStart: \(String(describing: subrangeStart)),
+            title: \(String(describing: title)),
+            discontinuity: \(String(describing: discontinuity)),
+            path: \(String(describing: path))
+        """
     }
 }

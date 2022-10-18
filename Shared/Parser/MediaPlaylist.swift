@@ -7,7 +7,7 @@
 
 import Foundation
 
-open class MediaPlaylist {
+open class MediaPlaylist: CustomStringConvertible {
     var masterPlayList: MasterPlaylist?
     
     open var programId: Int = 0
@@ -45,5 +45,17 @@ open class MediaPlaylist {
     
     open func getMaster() -> MasterPlaylist? {
         return self.masterPlayList
+    }
+    
+    public var description: String {
+        return """
+        programId: \(String(describing: programId)),
+        bandwidth: \(String(describing: bandwidth)),
+        path: \(String(describing: path)),
+        version: \(String(describing: version)),
+        targetDuration: \(String(describing: targetDuration)),
+        mediaSequence: \(String(describing: mediaSequence)),
+        segments: \(String(describing: segments))
+        """
     }
 }
